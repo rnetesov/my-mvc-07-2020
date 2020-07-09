@@ -1,40 +1,37 @@
 <?php
 
+
 namespace base;
+
 
 class View
 {
-	private $view_path;
-	private $template_path;
-	private $data = [];
+	private static $loader = null;
+	private static $twig = null;
+	protected $data = [];
+	protected $controller_name;
 
-	public function __construct($view)
+	public function __construct()
 	{
-		$this->view_path = VIEW_PATH.$view.'.'.VIEW_EXT;
+		if (is_null(self::$loader)) {
+			self::$loader = new \Twig\Loader\FilesystemLoader(TEMPLATE_PATH);
+			$cache = (TEMPLATE_CACHE) ? ['cache' => CACHE_TEMPLATE_PATH] : [];
+			self::$twig = new \Twig\Environment(self::$loader, $cache);
+
+			if (RELOAD_TEMPLATE) self::$twig->enableAutoReload();
+		}
 	}
 
-	public function render($data = [])
+	public function render($view, $data = [])
 	{
-		$data = array_merge($this->data, $data);
-		ob_start();
-		extract($data);
-		if (file_exists($this->view_path)) require_once $this->view_path;
-		else echo 'File view <b><i>'.$this->view_path.'</i></b> not found';
-		$result = ob_get_clean();
-		return $result;
+		$res = array_merge($this->data, $data);
+		return self::$twig->render($view.'.'.VIEW_EXT, $res);
 	}
 
-	public function renderTemplate($name_template, $data = [])
+	public function set($name, $value)
 	{
-		$this->template_path = TEMPLATE_PATH.$name_template.'.'.VIEW_EXT;
-		ob_start();
-		$data = array_merge($this->data, $data);
-		extract($data);
-		$content = ($this->view_path) ? $this->render() : null;
-		if (file_exists($this->template_path)) require_once $this->template_path;
-		else echo 'File template <b><i>'.$this->template_path.'</i></b> not found';
-		$result = ob_get_clean();
-		return $result;
+		$this->data[$name] = $value;
+		return $this;
 	}
 
 	public function __set($name, $value)
@@ -44,8 +41,6 @@ class View
 
 	public function __get($name)
 	{
-		if (isset($this->data[$name]))
-			return $this->data[$name];
-		return null;
+		return ($this->data[$name]) ?? null;
 	}
 }

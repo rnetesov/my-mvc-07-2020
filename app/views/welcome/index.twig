@@ -1,0 +1,37 @@
+{% extends "layouts/base.twig" %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+
+<h1>Привет мир</h1>
+<p> Hello {{ name|upper }}</p>
+<p>{{ surname }}</p>
+<p>{{ age }}</p>
+
+<div>
+    <ul>
+        <li>{{ item.id }}</li>
+        <li>{{ item.title }}</li>
+        <li>{{ item.price }}</li>
+        <li>{{ item.cnt }}</li>
+        <li>{{ item['with-status'] }}</li>
+    </ul>
+</div>
+
+<div>
+    <p>{{ item|join(', ') }}</p>
+</div>
+
+<div>
+    <ul>
+        {% for user in users %}
+            <li>{{ user.name|upper }} : {{ user.password }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
+{% block footer %}
+    <div>Footer</div>
+{% endblock %}

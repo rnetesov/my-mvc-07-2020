@@ -10,24 +10,35 @@ use base\View;
 class WelcomeController extends Controller
 {
 	public function actionIndex() {
+		$name       = 'john';
+		$surname    = 'Millosovish';
+		$age        = 29;
 
-		if ($this->request->isGet()) {
-			$view = new View('welcome/index');
-			$view->name = 'John';
-			$view->age = 29;
-			$view->headers = $this->request->getHeaders();
+		$item = [
+			'id' => 2,
+			'title' => 'Some product',
+			'price' => 127.45,
+			'cnt' => 4,
+			'with-status' => 23
+		];
 
-			$html = $view->renderTemplate('layout');
-			return $html;
-		}
+		$users = [
+			['name' => 'john', 'password' => md5('1234')],
+			['name' => 'nick', 'password' => md5('qwerty')],
+			['name' => 'martin', 'password' => md5('toorbal123')]
+		];
 
-		if ($this->request->isPost()) {
+		$this->view
+			->set("name", $name)
+			->set("surname", $surname)
+			->set("age", $age)
+			->set("item", $item)
+			->set("users", $users);
 
-			echo $this->request->getMethod();
-		}
+		return $this->view->render('welcome/index');
+	}
 
-		if ($this->request->isPut()) {
-			return $this->request->getMethod();
-		}
+	public function actionHello() {
+
 	}
 }
