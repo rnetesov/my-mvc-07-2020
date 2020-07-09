@@ -6,9 +6,9 @@ namespace controllers;
 
 use base\Controller;
 
-class Welcome extends Controller
+class WelcomeController extends Controller
 {
 	public function actionIndex() {
-
+		return 'Welcome';
 	}
 }
