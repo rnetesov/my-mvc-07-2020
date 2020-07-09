@@ -36,26 +36,31 @@ class Route
 		return false;
 	}
 
-	public function getPath() {
+	public function getPath()
+	{
 		$url = $_SERVER['REQUEST_URI'];
 		$url = explode('?', $url)[0];
 		$url = trim($url, '/');
 		return $url;
 	}
 
-	public function getControllerName() {
+	public function getControllerName()
+	{
 		return $this->controller;
 	}
 
-	public function getActionName() {
+	public function getActionName()
+	{
 		return $this->action;
 	}
 
-	public function getParams() {
+	public function getParams()
+	{
 		return $this->params;
 	}
 
-	private function buildRegExp() {
+	private function buildRegExp()
+	{
 		$regexp = str_replace(')', ')?', $this->rule);
 		$regexp = str_replace('<', '(?P<', $regexp);
 		$regexp = str_replace('>', '>'.self::$default_regexp.')', $regexp);
@@ -65,7 +70,6 @@ class Route
 				$regexp = str_replace($name.'>'.self::$default_regexp, $name.'>'.$reg, $regexp);
 			}
 		}
-
 		return $regexp;
 	}
 }

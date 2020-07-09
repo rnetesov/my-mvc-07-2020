@@ -2,14 +2,22 @@
 
 use system\Router;
 
-require_once __DIR__.'/../core/psr4autoloader.php';
+chdir(dirname(__DIR__));
+
+require_once 'core/psr4autoloader.php';
+
+define('VIEW_PATH', 'app/views/');
+define('TEMPLATE_PATH', 'app/templates/');
+define('VIEW_EXT', 'php');
+
 
 $loader = new Psr4AutoloaderClass();
 $loader->register();
-$loader->addNamespace('system', __DIR__.'/../core/system');
-$loader->addNamespace('base', __DIR__.'/../core/base');
-$loader->addNamespace('models', __DIR__.'/../app/models');
-$loader->addNamespace('controllers', __DIR__.'/../app/controllers');
+$loader->addNamespace('system', 'core/system');
+$loader->addNamespace('base', 'core/base');
+$loader->addNamespace('models', 'app/models');
+$loader->addNamespace('controllers', 'app/controllers');
+
 
 try {
 	$router = Router::getInstance();

@@ -9,7 +9,8 @@ class Router
 	private $routes = [];
 	private static $instance = null;
 
-	public static function getInstance() {
+	public static function getInstance()
+	{
 		if (is_null(self::$instance)) return  self::$instance = new self();
 		return self::$instance;
 	}
