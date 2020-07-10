@@ -1,13 +1,8 @@
 <?php
 
-namespace controllers;
+namespace Controllers;
 
-use base\Controller;
-
-class MainController extends Controller
+class MainController
 {
-	public function actionIndex()
-	{
-		return "Hello I'm Controller:main, action: index";
-	}
+
 }

@@ -1,18 +1,19 @@
 <?php
 
+namespace Controllers;
 
-namespace controllers;
 
-
-use base\Controller;
-
-class BlogController extends Controller
+class BlogController
 {
-	public function actionIndex(array $args) {
-		$name = $args['name'];
-		$id = $args['id'] ?? null;
+	public function delete() {
 
-		echo $name .' '.$id;
+	}
+
+	public function add() {
+
+	}
+
+	public function get() {
 
 	}
 }
