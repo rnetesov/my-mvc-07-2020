@@ -1,0 +1,46 @@
+{% extends 'default.twig' %}
+
+{% block title %} Страны {% endblock %}
+
+{% block content %}
+        {% for country in countries %}
+            {% if (loop.first) %}
+            <table id="customers">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Continent</th>
+                        <th>Region</th>
+                        <th>SurfaceArea</th>
+                        <th>IndepYear</th>
+                        <th>Population</th>
+                        <th>LifeExpectancy</th>
+                        <th>GNP</th>
+                        <th>GNPOld</th>
+                        <th>LocalName</th>
+                        <th>GovernmentForm</th>
+                        <th>Capital</th>
+                    </tr>
+                </thead>
+            {% endif %}
+            <tr>
+                <td><a href="">{{ country.Code }}</a></td>
+                <td><a href="/country/{{ country.Name | replace({' ': '-'}) | lower }}/cities">{{ country.Name }}</a></td>
+                <td><a href="/countries/continent/{{ country.Continent | replace({' ':'-'}) | lower }}">{{ country.Continent }}</a></td>
+                <td><a href="/countries/region/{{ country.Region | replace({' ':'-'}) | lower }}">{{ country.Region }}</a></td>
+                <td>{{ country.SurfaceArea | number_format(2, '.', ',') }}</td>
+                <td>{{ country.IndepYear }}</td>
+                <td>{{ country.Population | number_format(0, '.', ' ') }}</td>
+                <td>{{ country.LifeExpectancy }}</td>
+                <td>{{ country.GNP }}</td>
+                <td>{{ country.GNPOld }}</td>
+                <td>{{ country.LocalName }}</td>
+                <td><a href="/countries/government-form/{{ country.GovernmentForm | replace({' ':'-'}) | lower }}">{{ country.GovernmentForm }}</a></td>
+                <td>{{ country.CapitalName }}</td>
+            </tr>
+            {% if (loop.last) %}
+            </table>
+            {% endif %}
+        {% endfor %}
+{% endblock %}

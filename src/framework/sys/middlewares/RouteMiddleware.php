@@ -10,17 +10,16 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Sys\Resolver;
+use Sys\Services\Resolver;
 
 class RouteMiddleware implements MiddlewareInterface
 {
 	protected $routeContainter;
 	protected $pipeline;
 
-	public function __construct(RouterContainer $routerContainer, MiddlewarePipe $pipeline)
+	public function __construct(RouterContainer $routerContainer)
 	{
 		$this->routeContainter = $routerContainer;
-		$this->pipeline = $pipeline;
 	}
 
 	public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface

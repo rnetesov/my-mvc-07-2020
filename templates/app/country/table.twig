@@ -1,0 +1,52 @@
+{% extends 'default.twig' %}
+
+{% block title %} Страны {% endblock %}
+
+{% block content %}
+        {% for country in countries %}
+            {% if (loop.first) %}
+            <table class="w3-table-all w3-hoverable">
+                <thead>
+                    <tr class="w3-black">
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Continent</th>
+                        <th>Region</th>
+                        <th>SurfaceArea</th>
+                        <th>IndepYear</th>
+                        <th>Population</th>
+                        <th>LifeExpectancy</th>
+                        <th>GNP</th>
+                        <th>GNPOld</th>
+                        <th>LocalName</th>
+                        <th>GovernmentForm</th>
+                        <th>HeadOfState</th>
+                        <th>Capital</th>
+                        <th>Code2</th>
+                    </tr>
+                </thead>
+            {% endif %}
+            <tr class="w3-hover-orange">
+                <td><a href="">{{ country.Code }}</a></td>
+                <td>{{ country.Name }}</td>
+                <td><a href="/countries/continent/{{ country.Continent | replace({' ':'-'}) | lower }}">{{ country.Continent }}</a></td>
+                <td><a href="">{{ country.Region }}</a></td>
+                <td>{{ country.SurfaceArea }}</td>
+                <td>{{ country.IndepYear }}</td>
+                <td>{{ country.Population }}</td>
+                <td>{{ country.LifeExpectancy }}</td>
+                <td>{{ country.GNP }}</td>
+                <td>{{ country.GNPOld }}</td>
+                <td>{{ country.LocalName }}</td>
+                <td>{{ country.GovernmentForm }}</td>
+                <td>{{ country.HeadOfState }}</td>
+                <td>{{ country.Capital }}</td>
+                <td>{{ country.Code2 }}</td>
+            </tr>
+            {% if (loop.last) %}
+            </table>
+            {% endif %}
+        {% else %}
+            Countries Not Found
+        {% endfor %}
+{% endblock %}
